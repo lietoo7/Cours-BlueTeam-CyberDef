@@ -152,3 +152,51 @@ L'ingestion est le processus d'envoi de ces données vers le SIEM. Chaque soluti
 
 ---
 
+## Les Coulisses des Alertes (Behind the Triggered Alerts)
+
+Nous savons que le SIEM détecte les menaces, mais quel est le "secret" derrière ces détections ? Tout repose sur les **règles de détection**.
+
+Ces règles sont essentiellement des expressions logiques conçues pour se déclencher dès qu'une condition spécifique est remplie.
+
+### Exemples de règles logiques :
+
+* **Tentatives infructueuses :** SI un utilisateur cumule 5 échecs de connexion en 10 secondes, ALORS déclencher l'alerte *"Tentatives de connexion multiples échouées"*.
+* **Succès après échec :** SI une connexion réussit juste après plusieurs échecs, ALORS déclencher l'alerte *"Connexion réussie après échecs multiples"* (signe potentiel de Brute Force réussi).
+* **Usage de clé USB :** SI un utilisateur branche un périphérique USB, ALORS déclencher une alerte (si la politique de l'entreprise l'interdit).
+* **Exfiltration :** SI le trafic sortant est supérieur à 25 Mo, ALORS déclencher l'alerte *"Tentative potentielle d'exfiltration de données"*.
+
+ 
+
+## 2. Comment créer une règle de détection ?
+
+Prenons deux cas d'usage (Use-Cases) basés sur les journaux d'événements Windows (Eventlogs) :
+
+### Cas d'usage n°1 : Effacement des traces
+
+Les attaquants tentent souvent de supprimer les logs après une intrusion pour cacher leurs activités. Sous Windows, l'**Event ID 104** est généré chaque fois qu'un utilisateur vide les journaux.
+
+> **La Règle :** SI (Source = WinEventLog) ET (EventID = 104) ➔ **ALERTE : Journaux d'événements effacés.**
+
+### Cas d'usage n°2 : Reconnaissance (whoami)
+
+Après avoir compromis un système, un attaquant tape souvent `whoami` pour connaître ses privilèges. L'**Event ID 4688** correspond à la création d'un nouveau processus.
+
+> **La Règle :** SI (Source = WinEventLog) ET (EventID = 4688) ET (NewProcessName contient "whoami") ➔ **ALERTE : Exécution de la commande WHOAMI détectée.**
+
+ 
+
+## 3. L'Investigation de l'Alerte (Alert Investigation)
+
+Lorsqu'une alerte surgit sur son tableau de bord, l'analyste SOC doit mener l'enquête pour déterminer s'il s'agit d'un **Vrai Positif** ou d'un **Faux Positif**.
+
+### Actions possibles après l'analyse :
+
+* **Si c'est un Faux Positif :** L'alerte est classée. Il peut être nécessaire d'**affiner (tuner)** la règle de détection pour éviter que ce faux signal ne se reproduise inutilement.
+* **Si c'est un Vrai Positif :**
+* Approfondir l'investigation pour voir l'étendue des dégâts.
+* Contacter le propriétaire de l'équipement (le salarié ou l'administrateur) pour vérifier s'il est à l'origine de l'action.
+* Si l'activité malveillante est confirmée : **Isoler l'hôte infecté** du réseau.
+* **Bloquer l'adresse IP** suspecte au niveau du pare-feu.
+
+
+ 
