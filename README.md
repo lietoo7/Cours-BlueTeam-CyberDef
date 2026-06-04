@@ -29,5 +29,19 @@ A.I) Les fondamentaux du SOC
  - 3 [SOCL1 AlertReporting](SOC/SOCL1_AlertReporting.md)
  - 4 [SOCL1 Workbooks](SOC/SOCL1_workbooks.md)
  - 5 [SOCL1 Metrics](SOC/SOCL1_metrics.md)
- -  6 [l'EDR](SOC/EDR_Intro.md)
+ - 6 [l'EDR](SOC/EDR_Intro.md)
 
+A.II) Les Solutions pour le SOC
+* Plateforme SIEM
+ - 1 [Splunk]()
+ - 2 [ELK stack]()
+ - 3 [MSsentinel]()
+* Système de détection des intrusions (IDS/IPS)
+ - 1 [Suricata]()
+ - 2 [Snort]()
+ - 3 [Zeek]()
+* Gestion des journaux (Log Management)
+ - 1 [Graylog]()
+ - 2 [Datadog]()
+ - 3 [New Relic]()
+ - 4 [Splunk]()
