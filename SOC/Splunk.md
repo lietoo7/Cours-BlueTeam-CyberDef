@@ -27,9 +27,7 @@ L'accès à l'interface web de Splunk s'effectue par défaut via un navigateur s
 2. **Le panneau des applications (Apps Panel) :** Situé sur la partie gauche de l'écran, il liste l'ensemble des modules d'extension et applications installés sur l'instance. L'application standard et indispensable pour tout analyste est **Search & Reporting**.
 3. **La zone d'exploration (Explore Splunk) :** Située au centre, elle propose des raccourcis intuitifs pour interagir rapidement avec l'outil, notamment pour ajouter de nouvelles sources de données, installer des applications tierces (via Splunkbase) ou consulter la documentation officielle.
 4. **Le tableau de bord d'accueil (Home Dashboard) :** Zone personnalisable permettant d'épingler des graphiques et des indicateurs de performance (KPI) pertinents pour l'utilisateur ou l'équipe de sécurité.
-
-*Note de navigation (Question THM) :* Dans l'interface d'ajout de données, l'option spécifiquement conçue pour collecter et surveiller en continu des données provenant de fichiers locaux ou de ports réseau (TCP/UDP) se nomme **Monitor**.
-
+ 
 ### Ajouter des DATA
 
 L'ingestion de données est le point de départ de toute investigation. Dans le scénario pratique traité (analyse des logs VPN), le processus suit une méthodologie standardisée en 5 étapes via l'option **Upload** (chargement d'un fichier local) :
