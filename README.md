@@ -1,6 +1,6 @@
 ## INTRO
 ## SOMMAIRE
-### A)Cours sur le SOC
+### A) Cours sur le SOC
 A.I) Les fondamentaux du SOC
  - 1 [Le SIEM](SIEM.md) , [Le SOC](SOCIntroduction.md)
  - 2 [SOCL1 AlertTriage](SOCL1_AlertTriage.md)
