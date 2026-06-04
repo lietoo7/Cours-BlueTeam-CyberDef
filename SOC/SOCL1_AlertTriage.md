@@ -29,62 +29,14 @@ Voici la structure type des propriétés d'une alerte de sécurité :
 
 | № | Propriété | Description | Exemples |
 | --- | --- | --- | --- |
-| **1** | **Heure de l'alerte**<br>
-
-<br>*(Alert Time)* | Indique le moment où l'alerte a été créée. Elle se déclenche généralement quelques minutes après l'événement réel. | • Heure de l'alerte : 21 mars, 15h35<br>
-
-<br>• Heure de l'événement : 21 mars, 15h32 |
-| **2** | **Nom de l'alerte**<br>
-
-<br>*(Alert Name)* | Fournit un résumé succinct de ce qui s'est passé, basé sur le nom de la règle de détection qui s'est déclenchée. | • Connexion depuis un lieu inhabituel<br>
-
-<br>• E-mail signalé comme Phishing<br>
-
-<br>• Attaque par force brute RDP Windows<br>
-
-<br>• Exfiltration potentielle de données |
-| **3** | **Sévérité de l'alerte**<br>
-
-<br>*(Alert Severity)* | Définit le niveau d'urgence. Elle est initialement fixée par les ingénieurs de détection, mais l'analyste peut la modifier si l'investigation le justifie. | • (🟢) Faible / Informationnelle<br>
-
-<br>• (🟡) Moyenne / Modérée<br>
-
-<br>• (🟠) Haute / Sévère<br>
-
-<br>• (🔴) Critique / Urgente |
-| **4** | **Statut de l'alerte**<br>
-
-<br>*(Alert Status)* | Indique si quelqu'un est déjà en train de traiter l'alerte ou si l'analyse est terminée. | • (🆕) Nouvelle / Non attribuée<br>
-
-<br>• (🔄) En cours / En attente<br>
-
-<br>• (✅) Clôturée / Résolue<br>
-
-<br>*(Et d'autres statuts personnalisés selon le SOC)* |
-| **5** | **Verdict de l'alerte**<br>
-
-<br>*(Alert Verdict)* | Également appelé classification, il précise si l'alerte correspond à une menace réelle ou à du bruit de fond. | • (🔴) Vrai Positif (Menace réelle)<br>
-
-<br>• (🟢) Faux Positif (Fausse alerte)<br>
-
-<br>*(Et souvent d'autres verdicts personnalisés)* |
-| **6** | **Responsable**<br>
-
-<br>*(Alert Assignee)* | Indique l'analyste auquel l'alerte a été attribuée (ou qui s'est auto-attribué l'alerte). Le responsable prend la charge de l'investigation. | • Parfois appelé *Alert Owner* (propriétaire de l'alerte). |
-| **7** | **Description**<br>
-
-<br>*(Alert Description)* | Explique le contexte de l'alerte. Elle se compose généralement de trois sections : la logique de la règle, pourquoi cette activité est suspecte, et comment la traiter. | • Logique de la règle de détection.<br>
-
-<br>• Pourquoi cette activité peut indiquer une attaque.<br>
-
-<br>• (Optionnel) Guide de tri de l'alerte. |
-| **8** | **Champs de l'alerte**<br>
-
-<br>*(Alert Fields)* | Fournit les valeurs techniques précises qui ont déclenché la règle, ainsi que les commentaires des analystes. | • Nom de l'hôte affecté (*Hostname*)<br>
-
-<br>• Ligne de commande exécutée<br>
-
-<br>*(Et bien d'autres selon le type de détection)* |
+| **1** | **Heure de l'alerte**<br><br>*(Alert Time)* | Indique le moment où l'alerte a été créée. Elle se déclenche généralement quelques minutes après l'événement réel. | • Heure de l'alerte : 21 mars, 15h35<br><br>• Heure de l'événement : 21 mars, 15h32 |
+| **2** | **Nom de l'alerte**<br><br>*(Alert Name)* | Fournit un résumé succinct de ce qui s'est passé, basé sur le nom de la règle de détection qui s'est déclenchée. | • Connexion depuis un lieu inhabituel<br><br>• E-mail signalé comme Phishing<br><br>• Attaque par force brute RDP Windows<br><br>• Exfiltration potentielle de données |
+| **3** | **Sévérité de l'alerte**<br><br>*(Alert Severity)* | Définit le niveau d'urgence. Elle est initialement fixée par les ingénieurs de détection, mais l'analyste peut la modifier si l'investigation le justifie. | • (🟢) Faible / Informationnelle<br><br>• (🟡) Moyenne / Modérée<br><br>• (🟠) Haute / Sévère<br><br>• (🔴) Critique / Urgente |
+| **4** | **Statut de l'alerte**<br><br>*(Alert Status)* | Indique si quelqu'un est déjà en train de traiter l'alerte ou si l'analyse est terminée. | • (🆕) Nouvelle / Non attribuée<br><br>• (🔄) En cours / En attente<br><br>• (✅) Clôturée / Résolue<br><br>*(Et d'autres statuts personnalisés selon le SOC)* |
+| **5** | **Verdict de l'alerte**<br><br>*(Alert Verdict)* | Également appelé classification, il précise si l'alerte correspond à une menace réelle ou à du bruit de fond. | • (🔴) Vrai Positif (Menace réelle)<br><br>• (🟢) Faux Positif (Fausse alerte)<br><br>*(Et souvent d'autres verdicts personnalisés)* |
+| **6** | **Responsable**<br><br>*(Alert Assignee)* | Indique l'analyste auquel l'alerte a été attribuée (ou qui s'est auto-attribué l'alerte). Le responsable prend la charge de l'investigation. | • Parfois appelé *Alert Owner* (propriétaire de l'alerte). |
+| **7** | **Description**<br><br>*(Alert Description)* | Explique le contexte de l'alerte. Elle se compose généralement de trois sections : la logique de la règle, pourquoi cette activité est suspecte, et comment la traiter. | • Logique de la règle de détection.<br><br>• Pourquoi cette activité peut indiquer une attaque.<br><br>• (Optionnel) Guide de tri de l'alerte. |
+| **8** | **Champs de l'alerte**<br><br>*(Alert Fields)* | Fournit les valeurs techniques précises qui ont déclenché la règle, ainsi que les commentaires des analystes. | • Nom de l'hôte affecté (*Hostname*)<br><br>• Ligne de commande exécutée<br><br>*(Et bien d'autres selon le type de détection)* |
 
 ## Choisir la bonne alerte
 
