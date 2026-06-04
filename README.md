@@ -45,3 +45,5 @@ A.II) Les Solutions pour le SOC
  - 2 [Datadog]()
  - 3 [New Relic]()
  - 4 [Splunk]()
+* Le all-in-one
+ - [Security Onion](https://github.com/Security-Onion-Solutions/securityonion)
