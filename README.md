@@ -29,4 +29,5 @@ A.I) Les fondamentaux du SOC
  - 3 [SOCL1 AlertReporting](SOC/SOCL1_AlertReporting.md)
  - 4 [SOCL1 Workbooks](SOC/SOCL1_workbooks.md)
  - 5 [SOCL1 Metrics](SOC/SOCL1_metrics.md)
+ -  6 [l'EDR](SOC/EDR_Intro.md)
 
