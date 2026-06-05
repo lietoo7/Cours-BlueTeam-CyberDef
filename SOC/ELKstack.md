@@ -161,8 +161,3 @@ Après avoir sauvegardé vos recherches et vos visualisations, vous pouvez les c
 5. **Sauvegardez impérativement** le tableau de bord une fois terminé.
 
 ---
-
-**Répondez aux questions ci-dessous**
-*Créez le tableau de bord contenant les visualisations disponibles.*
-
----
