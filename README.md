@@ -30,6 +30,7 @@ A.I) Les fondamentaux du SOC
  - 4 [SOCL1 Workbooks](SOC/SOCL1_workbooks.md)
  - 5 [SOCL1 Metrics](SOC/SOCL1_metrics.md)
  - 6 [l'EDR](SOC/EDR_Intro.md)
+ - 7 [Le SOAR (Security Orchestration, Automation, and Response)](SOC/SOAR.md)
 
 A.II) Les Solutions pour le SOC
 * Plateforme SIEM
