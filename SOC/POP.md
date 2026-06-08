@@ -1,142 +1,180 @@
-# INTRODUCTION
-Pyramid of pain est un concept reconnu est appliqué aux solutions de cybersécurité telles que Cisco Security, SentinelOne et SOCRadar afin d'améliorer l'efficacité du renseignement sur les cybermenaces (CTI), de la chasse aux menaces et des exercices de réponse aux incidents.
-Il est important pour un chasseur de menaces, un intervenant ou un analyste SOC de comprendre le concept de la Pyramide de la Douleur.
+ 
+
+## INTRODUCTION
+
+La **Pyramid of Pain** (Pyramide de la Douleur) est un concept conceptuel reconnu et appliqué au sein des solutions de cybersécurité (telles que Cisco Security, SentinelOne et SOCRadar) pour améliorer l'efficacité du renseignement sur les cybermenaces (**CTI - Cyber Threat Intelligence**), de la chasse aux menaces (*Threat Hunting*) et des opérations de réponse aux incidents.
+
+Pour un chasseur de menaces, un analyste SOC ou un intervenant en cas d'incident, la maîtrise de ce concept est fondamentale pour évaluer l'impact de leurs mécanismes de détection sur l'adversaire.
 
 ```mermaid
 graph TD
-    %% Titre principal de la pyramide
-    Title[The Pyramid of Pain]:::titleStyle
+    %% Structure de la Pyramide (Du plus difficile au plus simple)
+    TTPs["🔺 TTPs (Tactics, Techniques & Procedures)"] --> Tools["🛠️ Outils (Tools)"]
+    Tools --> Artifacts["💻 Artéfacts Réseau & Hôte"]
+    Artifacts --> Domains["🌐 Noms de Domaine"]
+    Domains --> IPs["📍 Adresses IP"]
+    IPs --> Hashes["🔑 Valeurs de Hash"]
 
-    %% Structure de la pyramide (Niveaux interconnectés pour simuler la forme)
-    TTPs[TTPS]:::level6 --- Tough(Tough):::textStyle
-    Tools[Tools]:::level5 --- Challenging(Challenging):::textStyle
-    Artifacts[Network/ Host Artifacts]:::level4 --- Annoying(Annoying):::textStyle
-    Domains[Domain Names]:::level3 --- Simple(Simple):::textStyle
-    IPs[IP Addresses]:::level2 --- Easy(Easy):::textStyle
-    Hashes[Hash Values]:::level1 --- Trivial(Trivial):::textStyle
+    %% Niveaux de douleur associés (Alignement latéral via liens invisibles ou texte direct)
+    TTPs --- L6[Difficulté : Crucial / Tough]
+    Tools --- L5[Difficulté : Difficile / Challenging]
+    Artifacts --- L4[Difficulté : Ennuyeux / Annoying]
+    Domains --- L3[Difficulté : Simple / Simple]
+    IPs --- L2[Difficulté : Facile / Easy]
+    Hashes --- L1[Difficulté : Trivial / Trivial]
 
-    %% Alignement vertical invisible pour structurer le rendu
-    Title --- TTPs
-    TTPs --- Tools
-    Tools --- Artifacts
-    Artifacts --- Domains
-    Domains --- IPs
-    IPs --- Hashes
+    %% Styles CSS pour le rendu visuel
+    classDef level6 fill:#800e13,stroke:#fff,stroke-width:2px,font-weight:bold,color:#fff;
+    classDef level5 fill:#ff002b,stroke:#fff,stroke-width:2px,font-weight:bold,color:#fff;
+    classDef level4 fill:#ffb703,stroke:#fff,stroke-width:2px,font-weight:bold,color:#000;
+    classDef level3 fill:#2165cd,stroke:#fff,stroke-width:2px,font-weight:bold,color:#fff;
+    classDef level2 fill:#38b000,stroke:#fff,stroke-width:2px,font-weight:bold,color:#fff;
+    classDef level1 fill:#243e56,stroke:#fff,stroke-width:2px,font-weight:bold,color:#fff;
+    classDef textStyle fill:#1a2332,stroke:none,font-weight:bold,color:#8bee32;
 
-    %% --- Styles CSS pour correspondre à l'image_9a555d.jpg ---
-    classDef titleStyle fill:#1a2332,stroke:none,font-weight:bold,font-size:20px,color:#8bee32;
-    classDef textStyle fill:#1a2332,stroke:none,font-weight:bold,font-size:16px,color:#8bee32,width:150px;
-    
-    %% Couleurs des paliers de la pyramide
-    classDef level6 fill:#800e13,stroke:none,font-weight:bold,color:#fff;
-    classDef level5 fill:#ff002b,stroke:none,font-weight:bold,color:#fff;
-    classDef level4 fill:#ffb703,stroke:none,font-weight:bold,color:#fff;
-    classDef level3 fill:#2165cd,stroke:none,font-weight:bold,color:#fff;
-    classDef level2 fill:#38b000,stroke:none,font-weight:bold,color:#fff;
-    classDef level1 fill:#243e56,stroke:none,font-weight:bold,color:#fff;
+    class TTPs level6;
+    class Tools level5;
+    class Artifacts level4;
+    class Domains level3;
+    class IPs level2;
+    class Hashes level1;
+    class L6,L5,L4,L3,L2,L1 textStyle;
+
 ```
-## hash value 
-As per Microsoft, the hash value is a numeric value of a fixed length that uniquely identifies data. A hash value is the result of a hashing algorithm. The following are some of the most common hashing algorithms: 
 
-MD5 (Message Digest, defined by RFC 1321(opens in new tab)) - was designed by Ron Rivest in 1992 and is a widely used cryptographic hash function with a 128-bit hash value. MD5 hashes are NOT considered cryptographically secure. In 2011, the IETF published RFC 6151, "Updated Security Considerations for the MD5 Message-Digest and the HMAC-MD5 Algorithms(opens in new tab)," which mentioned a number of attacks against MD5 hashes, including the hash collision.
-SHA-1 (Secure Hash Algorithm 1, defined by RFC 3174(opens in new tab)- was invented by United States National Security Agency in 1995. When data is fed to SHA-1 Hashing Algorithm, SHA-1 takes an input and produces a 160-bit hash value string as a 40 digit hexadecimal number. NIST deprecated the use of SHA-1 in 2011(opens in new tab) and banned its use for digital signatures at the end of 2013 based on it being susceptible to brute-force attacks. Instead, NIST recommends migrating from SHA-1 to stronger hash algorithms in the SHA-2 and SHA-3 families.
-The SHA-2 (Secure Hash Algorithm 2) - SHA-2 Hashing Algorithm was designed by The National Institute of Standards and Technology (NIST) and the National Security Agency (NSA) in 2001 to replace SHA-1. SHA-2 has many variants, and arguably the most common is SHA-256. The SHA-256 algorithm returns a hash value of 256-bits as a 64 digit hexadecimal number.
-A hash is not considered to be cryptographically secure if two files have the same hash value or digest.
+---
 
-Security professionals usually use the hash values to gain insight into a specific malware sample, a malicious or a suspicious file, and as a way to uniquely identify and reference the malicious artifact.
+## Valeurs de Hash (Trivial)
 
-You've probably read ransomware reports in the past, where security researchers would provide the hashes related to the malicious or suspicious files used at the end of the report. You can check out The DFIR Report(opens in new tab) and Trellix Threat Research Blogs(opens in new tab) if you’re interested in seeing an example.
+Selon Microsoft, une valeur de hash (ou empreinte numérique) est une valeur numérique de longueur fixe qui identifie de manière unique une donnée. Elle est le résultat d'un algorithme de hachage. Voici les algorithmes les plus courants :
 
-Various online tools can be used to do hash lookups like VirusTotal(opens in new tab) and Metadefender Cloud - OPSWAT(opens in new tab).
+* **MD5 (Message Digest 5, défini par l'RFC 1321) :** Conçu par Ron Rivest en 1992, c'est une fonction de hachage cryptographique de 128 bits largement utilisée. **Le MD5 n'est plus considéré comme sécurisé.** En 2011, l'IETF a publié l'RFC 6151, signalant plusieurs attaques contre MD5, notamment les **collisions de hash** (deux fichiers distincts générant la même empreinte).
+* **SHA-1 (Secure Hash Algorithm 1, défini par l'RFC 3174) :** Développé par la NSA en 1995. Il produit une empreinte de 160 bits (représentée par une chaîne hexadécimale de 40 caractères). Le NIST a déprécié le SHA-1 en 2011 et interdit son utilisation pour les signatures numériques fin 2013 en raison de sa vulnérabilité aux attaques par force brute. Le NIST recommande de migrer vers les familles SHA-2 et SHA-3.
+* **SHA-2 (Secure Hash Algorithm 2) :** Conçu par le NIST et la NSA en 2001 pour remplacer le SHA-1. Il possède plusieurs variantes, la plus courante étant le **SHA-256**, qui renvoie une valeur de 256 bits (64 caractères hexadécimaux).
 
-However, as an attacker, modifying a file by even a single bit is trivial, which would produce a different hash value. With so many variations and instances of known malware or ransomware, threat hunting using file hashes as the IOC (Indicators of Compromise) can become difficult.
+> **Règle de sécurité :** Un algorithme de hachage n'est plus considéré comme cryptographiquement sûr si deux fichiers différents peuvent produire la même valeur de hash (collision).
 
-Let’s take a look at an example of how you can change the hash value of a file by simply appending a string to the end of a file using echo: File Hash (Before Modification)
- 
-## IP Address (Easy)
+### Utilisation opérationnelle
 
-You may have learned the importance of an IP Address from the "What is Networking?" Room. An IP address is used to identify any device connected to a network. These devices range from desktops, to servers and even CCTV cameras! We rely on IP addresses to send and receive the information over the network. But we are not going to get into the structure and functionality of the IP address. As a part of the Pyramid of Pain, we’ll evaluate how IP addresses are used as an indicator.
+Les professionnels de la sécurité utilisent les hashes pour identifier de manière unique un échantillon de malware ou un fichier suspect. Dans les rapports de menaces (comme ceux de *The DFIR Report* ou *Trellix Threat Research*), les indicateurs de compromission (IoC) de type hash sont systématiquement fournis en fin de document. Des outils en ligne comme **VirusTotal** ou **Metadefender Cloud (OPSWAT)** permettent d'effectuer des recherches rapides basées sur ces hashes.
 
-In the Pyramid of Pain, IP addresses are indicated with the color green. You might be asking why and what you can associate the green colour with?
+### Pourquoi est-ce "Trivial" ?
 
-From a defense standpoint, knowledge of the IP addresses an adversary uses can be valuable. A common defense tactic is to block, drop, or deny inbound requests from IP addresses on your parameter or external firewall. This tactic is often not bulletproof as it’s trivial for an experienced adversary to recover simply by using a new public IP address.
+Pour un attaquant, modifier un fichier (ne serait-ce qu'en modifiant un seul bit ou en ajoutant un caractère via une commande comme `echo`) suffit à modifier totalement la valeur du hash. Par conséquent, se baser uniquement sur les hashes de fichiers comme indicateurs de compromission (IoC) rend la chasse aux menaces très difficile face au polymorphisme des malwares.
 
-Malicious IP connections (app.any.run(opens in new tab)):
-NOTE! Do not attempt to interact with the IP addresses shown above.
+---
 
-One of the ways an adversary can make it challenging to successfully carry out IP blocking is by using Fast Flux.
+## Adresses IP (Facile)
 
-According to Akamai(opens in new tab), Fast Flux is a DNS technique used by botnets to hide phishing, web proxying, malware delivery, and malware communication activities behind compromised hosts acting as proxies. The purpose of using the Fast Flux network is to make the communication between malware and its command and control server (C&C) challenging to be discovered by security professionals. 
+Une adresse IP sert à identifier tout appareil connecté à un réseau (ordinateurs, serveurs, caméras IP). En sécurité défensive, connaître les adresses IP utilisées par un adversaire est utile, mais leur blocage (via un pare-feu périmétrique) constitue une défense fragile.
 
-So, the primary concept of a Fast Flux network is having multiple IP addresses associated with a domain name, which is constantly changing. Palo Alto created a great fictional scenario to explain Fast Flux: "(opens in new tab)Fast Flux 101: How Cybercriminals Improve the Resilience of Their Infrastructure to Evade Detection and Law Enforcement Takedowns"(opens in new tab)
+### Pourquoi est-ce "Facile" ?
 
-Read the following report (generated from any.run(opens in new tab)) for this sample here to answer the questions below:
+Il est extrêmement simple pour un attaquant expérimenté de contourner un blocage IP en obtenant une nouvelle adresse IP publique (via des proxys, VPN, ou infrastructures cloud éphémères).
 
-## Domain Names (Simple)
-Let's step up the Pyramid of Pain and move on to Domain Names. You can see the transition of colors - from green to teal.
+### La technique du Fast Flux
 
-Domain Names can be thought as simply mapping an IP address to a string of text. A domain name can contain a domain and a top-level domain (e.g. evilcorp.com ) or a sub-domain followed by a domain and top-level domain (e.g. tryhackme.evilcorp.com ). But we will not go into the details of how the Domain Name System (DNS) works. You can learn more about DNS in this "DNS in Detail" Room . 
+Pour complexifier le blocage d'IP, les attaquants utilisent le **Fast Flux**. Selon Akamai, il s'agit d'une technique DNS utilisée par les botnets pour masquer les activités de phishing, de livraison de malwares ou de communication de serveurs de commande et contrôle (**C2**) derrière un réseau changeant d'hôtes compromis agissant comme proxys. Le concept de base consiste à associer une multitude d'adresses IP à un seul nom de domaine, ces adresses changeant en continu à des fréquences très élevées.
 
-Domain Names can be a little more of a pain for the attacker to change as they would most likely need to purchase the domain, register it and modify DNS records. Unfortunately for defenders, many DNS providers have loose standards and provide APIs to make it even easier for the attacker to change the domain.
+---
 
-What you saw in the URL above is  adıdas.de  which has the Punycode of  http://xn--addas-o4a.de/
+## Noms de Domaine (Simple)
 
-Internet Explorer, Google Chrome, Microsoft Edge, and Apple Safari are now pretty good at translating the obfuscated characters into the full Punycode domain name.
- 
-To detect malicious domains, proxy logs or web server logs can be used.
- 
-Attackers usually hide the malicious domains under URL shorteners.   A URL Shortener is a tool that creates a short and unique URL that will redirect to the specific website specified during the initial step of setting up the URL Shortener link. The attackers normally use the following URL-shortening services to generate malicious links: 
- 
-bit.ly
-goo.gl
-ow.ly
-s.id
-smarturl.it
-tiny.pl
-tinyurl.com
-x.co
-You can see the actual website the shortened link is redirecting you to by appending "+" to it (see the examples below). Type the shortened URL in the address bar of the web browser and add the above characters to see the redirect URL. 
-Viewing Connections in Any.run:
+Un nom de domaine associe une adresse IP à une chaîne de caractères textuelle (ex: `evilcorp.com` ou le sous-domaine `tryhackme.evilcorp.com`).
 
- 
+### Pourquoi est-ce "Simple" ?
 
-Because Any.run is a sandboxing service that executes the sample, we can review any connections such as HTTP requests, DNS requests or processes communicating with an IP address. To do so, we can look at the "networking" tab located just below the snapshot of the machine.
+Changer de nom de domaine est légèrement plus contraignant pour un attaquant que de changer d'adresse IP : il doit acheter le domaine, l'enregistrer et modifier les enregistrements DNS. Cependant, de nombreux bureaux d'enregistrement (*registrars*) ont des critères de vérification souples et fournissent des API qui automatisent et facilitent ces modifications pour les cybercriminels.
 
-Please note : you should be extremely cautious about visiting any of the IP addresses or HTTP requests made in a report. After all, these are behaviours from the malware sample - so they're probably doing something dangerous!
+### Obscurcissement et détection
 
- 
+Les attaquants utilisent parfois des caractères homoglyphes (attaques par IDN homographe). Par exemple, le faux domaine `adıdas.de` se traduit techniquement en Punycode par `http://xn--addas-o4a.de/`. Les navigateurs modernes (Chrome, Edge, Safari) sont aujourd'hui performants pour traduire et afficher ces caractères obscurcis afin d'alerte l'utilisateur.
 
-HTTP Requests:
+Pour détecter les domaines malveillants, l'analyse des **logs de proxys** ou des **serveurs web** est indispensable.
 
-This tab shows the recorded HTTP requests since the detonation of the sample. This can be useful to see what resources are being retrieved from a webserver, such as a dropper or a callback.
+### Raccourcisseurs d'URL
 
-Connections:
+Les attaquants masquent souvent leurs domaines malveillants derrière des services de réduction d'URL pour duper les utilisateurs (ex: `bit.ly`, `goo.gl`, `ow.ly`, `s.id`, `tinyurl.com`).
+*Astuce de sécurité :* Sur la plupart de ces plateformes, ajouter le caractère `+` à la fin de l'URL raccourcie dans votre navigateur permet de visualiser la page de statistiques et l'URL de redirection réelle sans exécuter le lien.
 
-This tab shows any communications made since the detonation of the sample. This can be useful to see if a process communicates with another host. For example, this could be C2 traffic, uploading/downloading files over FTP, etc.
+### Analyse des connexions dans Any.run (Sandbox)
 
-DNS Requests:
+Lors de l'analyse d'un malware dans un environnement sécurisé (*sandbox*), l'onglet "Networking" permet d'isoler plusieurs types de requêtes :
 
-This tab shows the DNS requests made since the detonation of the sample. Malware often makes DNS requests to check for internet connectivity (I.e. if It can't reach the internet/call home, then it's probably being sandboxed or is useless). 
+* **Requêtes HTTP :** Utiles pour voir quelles ressources (comme un outil de téléchargement ou *dropper*) sont récupérées depuis un serveur web.
+* **Connections :** Montre toutes les communications réseau établies (flux C2, exfiltration FTP, etc.).
+* **Requêtes DNS :** Identifie les résolutions de noms. Les malwares effectuent souvent des requêtes DNS initiales pour tester leur connectivité Internet avant de s'activer.
 
-## Host Artifacts (Annoying)
+---
 
-Let's take another step up to the yellow zone.
+## Artéfacts Hôte (Ennuyeux / Annoying)
 
-On this level, the attacker will feel a little more annoyed and frustrated if you can detect the attack. The attacker would need to circle back at this detection level and change his attack tools and methodologies. This is very time-consuming for the attacker, and probably, he will need to spend more resources on his adversary tools.
+À ce niveau de la pyramide, si vos capacités de détection forcent l'attaquant à modifier ses artéfacts, vous commencez à l'épuiser. Il doit alors revoir ses outils et ses méthodologies, ce qui consomme du temps et des ressources.
 
-Host artifacts are the traces or observables that attackers leave on the system, such as registry values, suspicious process execution, attack patterns or IOCs (Indicators of Compromise), files dropped by malicious applications, or anything exclusive to the current threat.
+Les **artéfacts hôtes** sont les traces laissées par l'attaquant directement sur le système d'exploitation compromis :
 
-## Network Artifacts (Annoying)
-Network Artifacts also belong to the yellow zone in the Pyramid of Pain. This means if you can detect and respond to the threat, the attacker would need more time to go back and change his tactics or modify the tools, which gives you more time to respond and detect the upcoming threats or remediate the existing ones.
+* Clés et valeurs de registre modifiées ou créées.
+* Traces d'exécution de processus suspects.
+* Fichiers déposés (*dropped*) par les applications malveillantes.
+* Modèles d'attaque comportementaux propres à la menace sur la machine.
 
-A network artifact can be a user-agent string, C2 information, or URI patterns followed by the HTTP POST requests.An attacker might use a User-Agent string that hasn’t been observed in your environment before or seems out of the ordinary. The User-Agent is defined by RFC2616(opens in new tab) as the request-header field that contains the information about the user agent originating the request.
+---
 
-Network artifacts can be detected in PCAPs (file that contains the network packet dumps) by using a tool such as Wireshark or TShark, or exploring IDS (Intrusion Detection System) alerts from a tool such as Snort(opens in new tab). You will learn these tools in the following rooms, but in short, imagine a list of suspicious HTTP POST requests:
-It's hard to attribute the requests to a specific malware from the first glance, but you can dig deeper and look for its network indicators, such as the User-Agent. In TShark, you could use the following command:
+## Artéfacts Réseau (Ennuyeux / Annoying)
 
-tshark --Y http.request -T fields -e http.host -e http.user_agent -r analysis_file.pcap 
-These are the most common User-Agent strings found for the Emotet(opens in new tab) trojan. If you can detect the custom User-Agent strings that the attacker is using, you might be able to block them, creating more obstacles and making their attempt to compromise the network more annoying.
+Tout comme les artéfacts hôtes, les artéfacts réseau appartiennent à la zone jaune. Détecter ces éléments donne aux défenseurs un avantage temporel crucial pour remédier aux vulnérabilités avant que l'attaquant ne s'adapte.
 
+Un **artéfact réseau** peut être :
+
+* Une chaîne de caractères **User-Agent** spécifique ou inhabituelle.
+* La structure et le contenu des requêtes vers le serveur C2.
+* Des motifs d'URI récurrents lors de requêtes HTTP POST.
+
+### Détection pratique
+
+Ces artéfacts se détectent dans les captures de paquets (fichiers PCAP) via des outils comme **Wireshark** ou **TShark**, ou via des alertes d'IDS (Systèmes de Détection d'Intrusions) comme **Snort**.
+
+Exemple de commande TShark pour extraire les User-Agents et les hôtes visés :
+
+```bash
+tshark -Y http.request -T fields -e http.host -e http.user_agent -r fichier_analyse.pcap
+
+```
+
+*Note :* Le cheval de Troie *Emotet* est historiquement connu pour utiliser des chaînes User-Agent personnalisées très spécifiques. Les identifier permet de bloquer l'attaque au niveau du flux HTTP.
+
+---
+
+## Outils (Difficile / Challenging)
+
+À ce stade, l'attaquant utilise des logiciels spécifiques pour mener ses actions : utilitaires de création de documents macro malveillants (*maldocs*) pour le spearphishing, portes dérobées (*backdoors*) pour établir l'infrastructure C2, fichiers `.exe` ou `.dll` personnalisés, charges utiles (*payloads*) ou casseurs de mots de passe.
+
+### Vos armes défensives
+
+* **Signatures Antivirus & Règles YARA :** Essentielles pour identifier les fichiers d'outils connus. Des plateformes comme *MalwareBazaar* et *Malshare* fournissent des échantillons et des flux de règles YARA.
+* **Règles de détection comportementales :** Le site *SOC Prime Threat Detection Marketplace* permet aux professionnels de partager des règles de détection indexées sur les dernières vulnérabilités (CVE).
+* **Hachage Flou (Fuzzy Hashing) :** Contrairement au hachage traditionnel, le hachage flou (comme l'outil **SSDeep**) permet d'effectuer des analyses de similarité. Il peut associer deux fichiers distincts si ces derniers partagent une grande partie de leur code, même si l'attaquant a modifié quelques variables pour contourner les signatures classiques.
+
+---
+
+## TTPs - Tactiques, Techniques & Procédures (Crucial / Tough)
+
+Nous atteignons ici le sommet de la Pyramide de la Douleur.
+
+Les **TTPs** englobent l'ensemble de la matrice **MITRE ATT&CK**. Cela représente la méthodologie globale de l'adversaire pour atteindre son objectif, depuis l'accès initial (phishing) jusqu'à la persistance et l'exfiltration des données.
+
+Si vous êtes capable de détecter et de bloquer les TTPs de l'attaquant, vous ne lui laissez presque aucune chance de réagir.
+
+### Exemple concret
+
+Si vous détectez une attaque de type *Pass-the-Hash* grâce à la surveillance des journaux d'événements Windows (*Windows Event Logs*) et que vous la bloquez, vous neutralisez immédiatement sa capacité de déplacement latéral au sein de votre réseau.
+
+À ce niveau de blocage, l'attaquant n'a plus que deux options :
+
+1. Faire marche arrière, investir du temps et de l'argent dans la recherche, le développement et l'entraînement pour concevoir une approche totalement nouvelle.
+2. Abandonner et cibler une autre organisation moins bien protégée.
+
+L'option 2 est, de loin, la moins coûteuse pour lui, ce qui valide l'efficacité ultime d'une défense basée sur le sommet de la pyramide.
 
 
 
