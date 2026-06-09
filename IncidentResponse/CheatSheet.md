@@ -116,4 +116,24 @@ Ces valeurs décimales se retrouvent directement au niveau binaire dans le champ
 | **`47`** | `GRE` | Generic Routing Encapsulation (encapsulation pour tunnels VPN) |
 | **`50`** | `ESP` | Encapsulating Security Payload (chiffrement de paquets avec IPsec) |
 
+---
+## 7. *Information Gathering* / *Live Triage* sur un poste Windows 
  
+### Tableau de collecte d'informations 
+
+| Catégorie SANS | Objectif de la collecte | Principales commandes (Live) / Chemins d'artefacts | Interprétation & Valeur Analytique |
+| --- | --- | --- | --- |
+| **Account & System Profiling** *(Profil système & Utilisateurs)* | Identifier l'hôte, le domaine, les privilèges et la configuration de base. | `whoami /all``systeminfo``net user` / `net localgroup administrators``wmic os get /format:list` | Détermine le contexte de sécurité, l'architecture du système, la version exacte de l'OS et les comptes à fort privilège. |
+| **Evidence of Execution** *(Preuve d'exécution de programmes)* | Prouver qu'un outil malveillant ou suspect a été lancé sur la machine. | **Prefetch :** `C:\Windows\Prefetch\`**Shimcache :** Registre (`SYSTEM\CurrentControlSet\Control\Session Manager\AppCompatCache`)**Amcache :** `C:\Windows\AppCompat\Programs\Amcache.hve`**Live query :** `tasklist /v` ou `wmic process list full` | Permet de dater l'exécution d'un binaire (jusqu'aux 8 dernières exécutions pour le Prefetch), d'obtenir le compteur d'exécutions et le hachage de l'exécutable (Amcache). |
+| **Network Connections & State** *(Activité réseau active)* | Identifier des connexions persistantes vers un C2 (Command & Control) ou des ports d'écoute suspects. | `netstat -nao``netsh interface show interface``ipconfig /displaydns``arp -a` | Le commutateur `-o` de netstat lie la connexion réseau (IP distante/locale) directement au **PID** du processus parent suspect. |
+| **Persistence & Autorun** *(Mécanismes de persistance)* | Trouver où le malware s'est implanté pour survivre à un redémarrage. | **Run Keys :** `reg query HKLM\Software\Microsoft\Windows\CurrentVersion\Run`**Services :** `sc query` ou `tasklist /svc`**Tâches planifiées :** `schtasks /query /fo LIST /v` | Cartographie les déclencheurs automatiques. SANS recommande l'utilisation de l'outil *Autoruns* (Sysinternals) pour automatiser cette vérification. |
+| **File & Folder Access** *(Accès aux fichiers / Exfiltration)* | Découvrir quels dossiers ou fichiers l'attaquant (ou l'utilisateur) a consultés récemment. | **RecentDocs :** `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs`**ShellBags :** `HKCU\Software\Microsoft\Windows\Shell\Bags`**LNK Files :** `C:\Users\<User>\AppData\Roaming\Microsoft\Windows\Recent\` | Recrée l'historique de navigation de l'utilisateur dans l'Explorateur Windows, même si les fichiers ou dossiers cibles ont été supprimés depuis. |
+| **External Device Usage** *(Connexions de périphériques USB)* | Identifier l'utilisation de clés USB ou disques externes pour le vol de données. | **USBSTOR :** `HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR\`**MountedDevices :** `HKLM\SYSTEM\MountedDevices` | Extrait le fabricant, le modèle, le numéro de série unique du périphérique et la première/dernière date de connexion. |
+
+### Focus SANS : L'importance de l'Ordre de Volatilité
+
+Lors d'une prise d'informations en direct (*Live Response*), le SANS rappelle la règle absolue de l'**Ordre de Volatilité** (RFC 3227) : collectez toujours les informations les plus volatiles (qui disparaissent à l'extinction) en premier.
+
+1. **Mémoire RAM / Connexions réseau** (`netstat`, dump mémoire via *WinPmem* ou *FTK Imager*).
+2. **État du système en cours d'exécution** (Processus avec `tasklist`, tables ARP).
+3. **Artefacts du disque / Registre** (Fichiers de ruches du Registre, Prefetch, logs d'événements EVTX).
