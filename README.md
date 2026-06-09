@@ -60,3 +60,7 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
  - 3 [Unified KILLChain](SOC/UnifiedKillChain.md)
  - 4 [MITRE](SOC/MITRE.md)
 ### B) Exercices Pratiques
+
+B.I) Tryhackme https://tryhackme.com/
+
+ - 1 [SUMMIT Writeup](SOC/PRACTICE/thmsummit.md)
