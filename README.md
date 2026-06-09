@@ -61,7 +61,6 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
  - 4 [MITRE](SOC/MITRE.md)
    
 ### B) Cours sur Digital Forensics and Incident Response / Informatique légale et Réponse aux incidents (DFIR). 
-<br>
  - 1 [DFIR Introduction](DFIR/DFIRintro.md)
  - 2 [Le cycle de vie d'un incident selon le NIST et l'IETF]()
  - 3 [Le profil des attaquants modernes (Cybercriminalité, APT, Hacktivisme)]()
