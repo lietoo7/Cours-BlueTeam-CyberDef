@@ -84,3 +84,4 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
 C.I) Tryhackme https://tryhackme.com/
 
  - 1 [SUMMIT Writeup](SOC/PRACTICE/thmsummit.md)
+ - 2 [Cas de Phishing](SOC/PRACTICE/phishing.md)
