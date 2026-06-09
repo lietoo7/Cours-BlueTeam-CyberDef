@@ -1,5 +1,5 @@
 ## INTRODUCTION
-**la sécurité défensive**  s'articule autour de trois missions principales :
+**la sécurité informatique défensive**  s'articule autour de trois missions principales :
 
 1. **Prévenir** les intrusions avant qu'elles ne se produisent.
 2. **Détecter** les intrusions lorsqu'elles surviennent
@@ -63,6 +63,22 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
 ### B) Cours sur Digital Forensics and Incident Response / Informatique légale et Réponse aux incidents (DFIR). 
 <br>
  - 1 [DFIR Introduction](DFIR/DFIRintro.md)
+ - 2 [Le cycle de vie d'un incident selon le NIST et l'IETF]()
+ - 3 [Le profil des attaquants modernes (Cybercriminalité, APT, Hacktivisme)]()
+ - 4 [Aspects juridiques, conformité RGPD et déontologie de l'enquêteur]()
+ - 5 [Le principe de la preuve numérique et l'ordre de volatilité]()
+ - 6 [Garantir l'intégrité : Empreintes cryptographiques (Hashing) et chaîne de criticité (Chain of Custody)]()
+ - 7 [Le poste de travail de l'analyste : Configuration d'une station Forensique SIFT, CAINE, machines virtuelles isolées]()
+ - 8 [Mise en place d'un plan de réponse aux incidents IRP]()
+ - 9 [Les sources de détection : SIEM, EDR, NDR et SOC]()
+ - 10 [Triage initial : Qualifier une alerte et déterminer la sévérité]()
+ - 11 [Stratégies de confinement (Réseau, Comptes, Processus)]()
+ - 12 [L'art du Live Triage : Collecte d'urgence sur un système en cours d'exécution]()
+ - 13 [Éradication des menaces et remédiation (Nettoyage de l'Active Directory, reconstruction)]()
+ - 14 [Le RETEX et rapport d'incident]()
+ - 15 [Acquisition de la preuve (Collecte)]()
+ - 16 [Forensic Windows (L'analyse "Host")]()
+ - 17 [Forensic Linux et macOS]()
  
 ### C) Exercices Pratiques
 
