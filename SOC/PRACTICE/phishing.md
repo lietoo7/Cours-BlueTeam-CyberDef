@@ -272,6 +272,146 @@ Impact et usages des pixels de suivi
 Découvrez les outils essentiels qui aident un analyste à enquêter sur les e-mails suspectés d'hameçonnage.
 > Source : Tryhackme : https://tryhackme.com/room/phishingemails3tryoe
 
+## 1. Analyse d'en-têtes, de réputation d'adresses IP et d'URL.
+
+### L'Automatisation de l'Analyse des En-têtes (*Mail Header Analysis*)
+
+Bien que l'extraction manuelle des métadonnées directement depuis le code source brut d'un email soit une compétence fondamentale, ce processus peut s'avérer long et fastidieux lors d'investigations à grande échelle. Pour rationaliser et automatiser cette phase, les analystes en sécurité utilisent des outils d'analyse d'en-têtes. Ces solutions permettent d'extraire instantanément le chemin de routage, l'adresse IP d'origine de l'émetteur, ainsi que d'éventuelles erreurs de configuration de sécurité en y collant simplement l'en-tête brut.
+
+Parmi les outils de référence gratuits, on retrouve :
+
+* **Google Messageheader** *(intégré à la Google Admin Toolbox)* : Permet de cartographier rapidement le parcours de l'email de serveur en serveur et de mesurer les délais d'acheminement.
+* **Message Header Analyzer** : Une solution alternative offrant des capacités d'analyse similaires pour décoder la structure technique des en-têtes de manière lisible.
+
+### Analyse de Réputation : Adresses IP et Noms de Domaine
+
+Une fois les indicateurs techniques (IoC) extraits des en-têtes (comme l'adresse IP du serveur émetteur), le défenseur doit évaluer la légitimité de l'infrastructure utilisée par l'expéditeur afin de déterminer si elle est liée à des activités cybercriminelles connues.
+
+Plusieurs outils de Threat Intelligence (*Renseignement sur les menaces*) permettent de qualifier la dangerosité d'une adresse IP ou d'un domaine :
+
+* **IPinfo :** Cet outil fournit la géolocalisation précise d'une adresse IP ainsi que le nom de l'organisation ou du fournisseur de services Internet (FAI / ASN) auquel elle appartient. Il aide à déceler les incohérences géographiques majeures par rapport à l'expéditeur légitime prétendu.
+* **Cisco Talos IP & Domain Reputation Center :** Une plateforme de Threat Intelligence globale permettant de vérifier le score de réputation d'une IP, d'un domaine ou d'un réseau complet. Elle indique si l'indicateur soumis a déjà été classé comme malveillant ou s'il fait partie d'une liste noire active.
+
+### Analyse de Réputation et Sandbox d'URL
+
+L'investigation des hyperliens découverts dans le corps d'un email (ou cachés dans une pièce jointe) présente un risque de sécurité majeur : un analyste ne doit jamais cliquer directement sur un lien suspect depuis son poste de travail.
+
+Pour contourner ce risque, on utilise des outils d'analyse d'URL à distance :
+
+* **URLScan.io :** Cet outil agit comme une "Sandbox de navigation". Lorsqu'une URL lui est soumise, le service simule une session de navigation utilisateur réelle à partir d'un serveur distant sécurisé. Il enregistre l'intégralité des requêtes HTTP générées par la page, capture une capture d'écran du site rendu et analyse son comportement. Cela permet d'identifier la présence d'un portail de phishing ou d'un script malveillant sans jamais exposer l'infrastructure de l'entreprise.
+
+*Règle d'or : Suivant les principes de la posture rigoureuse du consultant, cette suite théorique est désormais prête à être enrichie par des ateliers pratiques de manipulation de ces outils.*
+
+## 2. Méthodologies d'extraction des URL et l'analyse de réputation des pièces jointes par hachage cryptographique.
+
+### Analyse du Corps de l'Email et Extraction des URL
+
+Le corps du message est l'espace où l'intention réelle de l'attaquant se matérialise. C'est là que sont positionnés les vecteurs d'infection ou de vol d'identifiants. L'extraction sécurisée des hyperliens est une étape clé de l'investigation pour identifier la destination finale d'une menace sans jamais s'y exposer.
+
+Pour collecter les URL d'un email en toute sécurité, deux méthodes principales sont appliquées :
+
+* **L'extraction manuelle ciblée :** Elle consiste à effectuer un clic droit sur le lien ou le bouton depuis le client de messagerie et à sélectionner l'option **Copier l'adresse du lien**. Cette manipulation permet de récupérer l'URL dans le presse-papiers afin de l'analyser textuellement ou de la soumettre à des outils de réputation, sans déclencher de session de navigation.
+* **L'extraction automatisée globale :** Lorsque le message ou son code source HTML est particulièrement dense ou obscurci, l'analyste utilise des outils d'extraction d'URL (ou des scripts de parsing). En y collant le contenu brut de l'email, ces outils isolent et listent automatiquement l'intégralité des liens imbriqués, minimisant ainsi le risque d'omission. Le framework polyvalent **CyberChef** dispose également d'opérations dédiées à cette fonction de parsing.
+
+### Gestion Sécurisée et Analyse des Pièces Jointes
+
+Face à un email suspect contenant une pièce jointe, le téléchargement direct sur un poste de travail de production est une erreur critique. Le traitement d'un fichier potentiellement malveillant impose le respect d'un protocole strict.
+
+> **Règle de manipulation :** > Tout téléchargement ou manipulation d'une pièce jointe suspecte doit s'effectuer exclusivement au sein d'un **environnement contrôlé et isolé**, tel qu'une machine virtuelle (VM) dédiée à l'analyse ou une Sandbox, afin de neutraliser tout risque d'exécution accidentelle sur le réseau de l'entreprise.
+
+### Analyse par Empreinte Numérique (Hachage)
+
+Une fois le fichier isolé en environnement sécurisé, la méthode la plus rapide et la plus sûre pour l'analyser consiste à calculer son **empreinte cryptographique** (ou *hash*). Le hachage génère un identifiant unique pour le fichier. Si le fichier est un malware connu, son empreinte aura déjà été répertoriée par la communauté de la cybersécurité.
+
+### Génération d'un Hash sous Linux
+
+Dans un terminal Linux, l'analyste utilise généralement la commande `sha256sum` pour générer l'empreinte SHA-256 du fichier :
+
+```bash
+user@tryhackme$ sha256sum shady_attachment.pdf
+025ba9ce4a2118a9ca7b115c8869ff73bc16bad3732ba359cef1e60ad8f961f9  shady_attachment.pdf
+
+```
+### Qualification de la Menace via les Plateformes de Réputation
+
+Une fois le hash obtenu, il n'est pas nécessaire de téléverser le fichier réel sur Internet. Il suffit de soumettre cette chaîne de caractères (le hash) aux plateformes de Threat Intelligence pour vérifier si le fichier a déjà été identifié comme malveillant.
+
+### Les Outils de Référence :
+
+* **Cisco Talos IP & Domain Reputation Center :** Permet de soumettre des empreintes de fichiers (hashes) pour obtenir leur classification immédiate (ex: labellisé comme *Phishing*, *Malicious*, ou *Spam*).
+* **VirusTotal :** C'est l'un des agrégateurs les plus puissants du secteur. Il centralise les analyses de dizaines de moteurs antivirus et de fournisseurs de sécurité du marché. En y soumettant un hash, une URL, ou une adresse IP, l'analyste obtient instantanément un rapport de détection détaillé. Si le hash est inconnu, la plateforme permet également de téléverser le fichier pour une analyse dynamique en temps réel. 
+
+## 3. L'Analyse Dynamique via les Bacs à Sable (*Malware Sandboxes*)
+
+Lorsqu'une pièce jointe suspecte n'est pas répertoriée sur les plateformes de réputation globales (son hash SHA-256 est inconnu), l'analyste doit étudier son comportement réel. Heureusement, il n'est pas nécessaire de posséder des compétences avancées en ingénierie inverse (*Reverse Engineering*) pour comprendre les intentions d'un fichier malveillant.
+
+Les défenseurs utilisent des **bacs à sable** (*Malware Sandboxes*), des environnements virtuels isolés et sécurisés conçus pour exécuter les fichiers suspects afin d'observer et de cartographier leurs actions en temps réel, sans aucun risque pour l'infrastructure de l'entreprise.
+
+### Objectifs de l'analyse en Sandbox
+
+L'exécution contrôlée d'un fichier permet de collecter de précieux Indicateurs de Compromission (IoC) :
+
+* **Activité Réseau :** Identifier les adresses IP et les URL distantes que le fichier tente de contacter (serveurs de commande et de contrôle - *C2*).
+* **Téléchargements de charges utiles :** Détecter si le fichier initial sert de compte-gouttes (*Dropper*) pour installer d'autres malwares.
+* **Modifications Système :** Suivre la création de processus suspects, les modifications dans la base de registre ou les tentatives d'altération de fichiers système.
+
+### Les Solutions de Sandbox de Référence
+
+Le marché de la Git-Defensive propose plusieurs plateformes cloud reconnues permettant d'automatiser ces analyses :
+
+### ANY.RUN (L'analyse interactive)
+
+**ANY.RUN** se distingue par son approche **interactive en temps réel**. Contrairement aux systèmes automatisés classiques, il permet à l'analyste d'interagir directement avec le système d'exploitation virtuel (cliquer sur des fenêtres, valider des invites de commande, ouvrir des fichiers).
+
+* *Avantage majeur :* Idéal pour déjouer les techniques d'évasion des malwares qui attendent une action humaine (un clic de l'utilisateur) pour déclencher leur charge utile.
+
+### Hybrid Analysis
+
+**Hybrid Analysis** est une solution gratuite combinant l'analyse statique (examen du code sans exécution) et l'analyse dynamique. Propulsée par la technologie Falcon Sandbox (CrowdStrike), elle fournit des rapports extrêmement détaillés sur l'évaluation des risques, les modifications de fichiers et le comportement réseau global de l'échantillon soumis.
+
+### JOE Sandbox (L'analyse approfondie)
+
+Développé par JOE Security, **JOE Sandbox** est un outil haut de gamme orienté vers l'analyse avancée et automatisée de fichiers et d'URL sur plusieurs systèmes d'exploitation (Windows, macOS, Linux, Android).
+
+* *Avantage majeur :* Génère des rapports d'expertise complets incluant la classification précise des menaces selon la matrice MITRE ATT&CK et la détection approfondie des comportements d'évasion complexes.
+
+## 3. Plateformes d'orchestration d'investigation 
+
+### Centralisation et Orchestration de l'Analyse : L'écosystème PhishTool
+
+L'analyse de phishing moderne nécessite l'usage combiné de multiples sources de données (données d'en-tête, réputation d'URL, hachage de fichiers, OSINT, Threat Intelligence). Pour éviter la dispersion des données et accélérer la prise de décision, les analystes SOC *(Security Operations Center)* et les chasseurs de menaces utilisent des plateformes de tri centralisées comme **PhishTool**.
+
+Ces outils automatisent la majeure partie du travail forensique manuel en regroupant l'ensemble des artefacts au sein d'une interface d'analyse unique.
+
+### Identification et Visualisation des Artefacts
+
+Lorsqu'un fichier d'email suspect (`.eml` ou `.msg`) est téléversé dans la plateforme, le système extrait et segmente automatiquement les composants essentiels afin de fournir plusieurs niveaux de lecture simultanés :
+
+* **La vue HTML interprétée (*Rendered HTML view*) :** Restitue l'affichage exact du message tel que la victime l'a perçu dans sa boîte de réception, permettant d'évaluer l'efficacité de l'ingénierie sociale (logos, charte graphique).
+* **La vue HTML brute (*Raw HTML*) :** Isole le code source de mise en forme pour inspecter la structure des balises, les redirections dissimulées et les attributs de liens suspectés.
+* **Le code source complet (*Message Source*) :** Donne un accès direct à l'intégralité des en-têtes techniques et des blocs de données Mime non interprétés.
+
+### Analyse Approfondie et Intégration de Threat Intelligence
+
+La plateforme organise l'investigation à travers différents onglets techniques dédiés à des vérifications spécifiques :
+
+* **Résultats d'Authentification (*Authentication results*) :** Permet de contrôler instantanément la validité des protocoles de sécurité de l'email (validation SPF, DKIM, DMARC) afin de détecter les tentatives d'usurpation de domaine.
+* **Chemins de Transmission (*Transmission paths*) :** Cartographie le routage de l'email à travers les différents serveurs de relais (sauts de serveurs) pour identifier le point d'injection initial.
+* **Inspection des Liens et Fichiers :** Analyse de manière isolée les URL imbriquées et les pièces jointes présentes.
+
+### L'Intégration Pivot (Exemple : VirusTotal)
+
+L'un des atouts majeurs de ces plateformes d'orchestration réside dans leur capacité à interroger des API tierces. L'intégration native avec des services comme **VirusTotal** permet à l'analyste de consulter les scores de détection et la réputation d'un composant (IP, domaine, hash de fichier) directement depuis l'interface de tri, sans rupture de flux de travail (*workflow*).
+
+### Résolution de l'Incident et Clôture du Cas (*Case Closure*)
+
+La phase finale de la méthodologie d'analyse de phishing suit un processus rigoureux d'archivage et de remédiation, calqué sur les exigences réelles d'un environnement SOC :
+
+1. **Qualification de la menace :** Une fois les preuves techniques accumulées, l'analyste qualifie formellement la nature du message (ex: marquage comme *Malicieux*, *Spam*, ou *Bénin*).
+2. **Signalement des artefacts (Flagging) :** Les indicateurs de compromission validés durant l'exercice (adresses de l'expéditeur, adresses IP d'origine, URL frauduleuses) sont marqués et indexés.
+3. **Documentation forensique :** Rédaction de notes d'investigation claires détaillant le comportement de la menace, les actions menées, et les éventuels postes de travail ayant interagi avec le message.
+4. **Clôture (Resolve) :** Le dossier est clôturé. Les IoC ainsi documentés alimentent les listes de blocage de l'organisation (moteurs de filtrage, pare-feux, EDR) afin de neutraliser définitivement la campagne d'attaque.
+
 ---
 
 # Prévention du phishing
