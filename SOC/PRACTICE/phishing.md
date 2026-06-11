@@ -375,7 +375,7 @@ Développé par JOE Security, **JOE Sandbox** est un outil haut de gamme orient�
 
 * *Avantage majeur :* Génère des rapports d'expertise complets incluant la classification précise des menaces selon la matrice MITRE ATT&CK et la détection approfondie des comportements d'évasion complexes.
 
-## 3. Plateformes d'orchestration d'investigation 
+## 4. Plateformes d'orchestration d'investigation 
 
 ### Centralisation et Orchestration de l'Analyse : L'écosystème PhishTool
 
