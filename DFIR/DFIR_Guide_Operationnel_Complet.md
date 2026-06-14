@@ -1,33 +1,33 @@
 # DFIR : Le Guide Opérationnel de l'Investigation Numérique et de la Réponse aux Incidents
-
+Source : AnT\thropic, Claude : https://www.anthropic.com/
 ---
 
-## 📋 Table des Matières
+## Table des Matières
 
-### 📜 **Partie 1 : Les Fondations du DFIR**
+###  **Partie 1 : Les Fondations du DFIR**
 - Chapitre 1 : Introduction à l'écosystème DFIR
 - Chapitre 2 : Méthodologie et chaîne de captation
 
-### 🛑 **Partie 2 : Réponse aux Incidents**
+###  **Partie 2 : Réponse aux Incidents**
 - Chapitre 3 : Préparation et Détection
 - Chapitre 4 : Confinement, Éradication et Résilience
 
-### 🔍 **Partie 3 : Informatique Légale et Analyse des Artefacts**
+###  **Partie 3 : Informatique Légale et Analyse des Artefacts**
 - Chapitre 5 : Acquisition de la preuve
 - Chapitre 6 : Forensic Windows
 - Chapitre 7 : Forensic Linux et macOS
 
-### 🌐 **Partie 4 : Investigations Spécialisées**
+###  **Partie 4 : Investigations Spécialisées**
 - Chapitre 8 : Forensic Réseau et Analyse de Trafic
 - Chapitre 9 : Forensic Cloud
 
-### 🧪 **Partie 5 : Analyse Avancée & Chasse aux Menaces**
+###  **Partie 5 : Analyse Avancée & Chasse aux Menaces**
 - Chapitre 10 : Analyse de la Mémoire RAM
 - Chapitre 11 : Threat Hunting et rétro-ingénierie de malwares
 
 ---
 
-# 📜 PARTIE 1 : LES FONDATIONS DU DFIR
+#  PARTIE 1 : LES FONDATIONS DU DFIR
 
 ---
 
@@ -540,7 +540,7 @@ sha256sum case_2024_001.tar.gz.gpg > final_hash.txt
 
 ---
 
-# 🛑 PARTIE 2 : RÉPONSE AUX INCIDENTS
+#  PARTIE 2 : RÉPONSE AUX INCIDENTS
 
 ---
 
