@@ -64,7 +64,7 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
  - 1 [Introduction à l'écosystème DFIR](DFIR/DFIRintro.md)
  - 2 [Méthodologie et chaîne de captation](DFIR/DFIRmethodo&chainedecaptation.md)
  - 3 [Préparation et Détection](DFIR/Prepa&DetectOn.md)
- - 6 [Garantir l'intégrité : Empreintes cryptographiques (Hashing) et chaîne de criticité (Chain of Custody)]()
+ - 4 [Confinement, Éradication et Résilience](DFIR/DFIR_CER.md)
  - 7 [Le poste de travail de l'analyste : Configuration d'une station Forensique SIFT, CAINE, machines virtuelles isolées]()
  - 8 [Mise en place d'un plan de réponse aux incidents IRP]()
  - 9 [Les sources de détection : SIEM, EDR, NDR et SOC]()
