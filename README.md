@@ -61,9 +61,9 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
  - 4 [MITRE](SOC/MITRE.md)
    
 ### B) Cours sur Digital Forensics and Incident Response / Informatique légale et Réponse aux incidents (DFIR). 
- - 1 [DFIR Introduction et cycle de vie d'un incident](DFIR/DFIRintro.md)
- - 2 [Le profil des attaquants / Aspects juridiques, conformité RGPD et déontologie de l'enquêteur ](DFIR/ProfildesAttaquants_Aspectsjuridiques.md)
- - 5 [Le principe de la preuve numérique et l'ordre de volatilité]()
+ - 1 [Introduction à l'écosystème DFIR](DFIR/DFIRintro.md)
+ - 2 [Méthodologie et chaîne de captation](DFIR/DFIRmethodo&chainedecaptation.md)
+ - 3 [Le principe de la preuve numérique et l'ordre de volatilité](DFIR/)
  - 6 [Garantir l'intégrité : Empreintes cryptographiques (Hashing) et chaîne de criticité (Chain of Custody)]()
  - 7 [Le poste de travail de l'analyste : Configuration d'une station Forensique SIFT, CAINE, machines virtuelles isolées]()
  - 8 [Mise en place d'un plan de réponse aux incidents IRP]()
