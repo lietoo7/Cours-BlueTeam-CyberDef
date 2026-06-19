@@ -69,7 +69,7 @@ Voici deux autres scénarios illustrant l’importance de l’analyse du trafic 
  ## Que peut-on observer dans le trafic réseau ?
 
 La meilleure façon de montrer le trafic qu’on peut observer dans un réseau est d’utiliser l’architecture implémentée dans presque tous les équipements disposant d’une interface réseau : la pile TCP/IP.
-````text
+```text
  
 +---------------------------+
 |      Applications        |
@@ -208,4 +208,4 @@ No.   Time       Source           Destination      Protocol Length Info
 5     1.100000   192.168.1.10     172.217.22.14    TCP      74     54433 → 80 [SYN] Seq=0 Win=64240 Len=0
 6     1.100120   192.168.1.200    172.217.22.14    TCP      74     54433 → 80 [SYN] Seq=0 Win=64240 Len=0  <-- Relayed via attacker
 ```
- 
+
