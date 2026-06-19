@@ -32,6 +32,7 @@ Découvrez les compétences et outils d'un analyste SOC pour trier, classifier e
  - 5 [SOCL1 Metrics](SOC/SOCL1_metrics.md)
  - 6 [l'EDR](SOC/EDR_Intro.md)
  - 7 [Le SOAR (Security Orchestration, Automation, and Response)](SOC/SOAR.md)
+ - 8 [L'Analyse du trafic réseau](SOC/trafficanalysis.md)
 
 A.II) Les Solutions pour le SOC
 La compréhension des solutions de sécurité est essentielle pour les analystes SOC.
