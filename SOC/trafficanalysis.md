@@ -69,21 +69,39 @@ Voici deux autres scénarios illustrant l’importance de l’analyse du trafic 
  ## Que peut-on observer dans le trafic réseau ?
 
 La meilleure façon de montrer le trafic qu’on peut observer dans un réseau est d’utiliser l’architecture implémentée dans presque tous les équipements disposant d’une interface réseau : la pile TCP/IP.
-```mermaid
-flowchart TB
-  A[Applications<br/>HTTP, HTTPS, DNS, SMTP, FTP, etc.] --> B[Transport<br/>TCP / UDP]
-
-  B --> C[Internet<br/>IP (IPv4/IPv6), ICMP]
-  C --> D[Liaison de données / Accès réseau<br/>Ethernet, Wi‑Fi, PPP, etc.]
-
-  D --> E[Support physique<br/>signaux/réseau hertzien/câble]
-  
-  %% Retours de données (optionnel)
-  E --> D
-  D --> C
-  C --> B
-  B --> A
+````text
+ 
++---------------------------+
+|      Applications        |
+| (HTTP/HTTPS, DNS, SMTP)  |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|        Transport         |
+|        TCP / UDP         |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|          Internet        |
+|      IP (v4/v6) / ICMP   |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|  Liaison de données /    |
+|     Accès réseau         |
+| (Ethernet, Wi‑Fi, PPP)   |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|   Support physique       |
+| (câble, ondes radio, etc)|
++---------------------------+
 ```
+ 
 Les logs incluent souvent des morceaux de ces en-têtes, mais jamais les détails complets du paquet. C’est justement pour cela qu’on a besoin d’une analyse du trafic réseau.
 
 ### Couche Application
