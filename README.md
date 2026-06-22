@@ -36,15 +36,18 @@ Découvrez les compétences et outils d'un analyste SOC pour trier, classifier e
 #### A.II) Les Solutions pour le SOC
 La compréhension des solutions de sécurité est essentielle pour les analystes SOC.
 Ce module aborde les solutions SIEM, EDR, d'IDS/IPS et SOAR.
-* Plateforme SIEM
+> Plateforme SIEM
+> 
  - 1 [Splunk](SOC/Splunk.md)
  - 2 [ELK stack](SOC/ELKstack.md)
  - 3 [MSsentinel]()
-* Système de détection des intrusions (IDS/IPS)
+> Système de détection des intrusions (IDS/IPS)
+> 
  - 1 [Suricata]()
  - 2 [Snort]()
  - 3 [Zeek]()
-* Gestion des journaux (Log Management)
+> Gestion des journaux (Log Management)
+> 
  - 1 [Graylog]()
  - 2 [Datadog]()
  - 3 [New Relic]()
