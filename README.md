@@ -23,7 +23,8 @@ La sécurité défensive est un domaine extrêmement vaste. En plus des missions
  
 ## SOMMAIRE
 ### A) Cours sur le SOC
-#### ** A.I) Les fondamentaux du SOC **
+#### **A.I) Les fondamentaux du SOC**
+<br>
 Découvrez les compétences et outils d'un analyste SOC pour trier, classifier et escalader les alertes.
  - 1 [Le SIEM](SOC/SIEM.md) , [Le SOC](SOC/SOCIntroduction.md)
  - 2 [SOCL1 AlertTriage](SOC/SOCL1_AlertTriage.md)
@@ -35,6 +36,7 @@ Découvrez les compétences et outils d'un analyste SOC pour trier, classifier e
  - 8 [L'Analyse du trafic réseau](SOC/trafficanalysis.md)
 
 #### ** A.II) Les Solutions pour le SOC **
+<br>
 La compréhension des solutions de sécurité est essentielle pour les analystes SOC.
 Ce module aborde les solutions SIEM, EDR, d'IDS/IPS et SOAR.
 * Plateforme SIEM
@@ -53,7 +55,8 @@ Ce module aborde les solutions SIEM, EDR, d'IDS/IPS et SOAR.
 * Le all-in-one
  - [Security Onion](https://github.com/Security-Onion-Solutions/securityonion)
 
-#### ** A.III) CyberDefense Frameworks ** <br>
+#### ** A.III) CyberDefense Frameworks **
+<br>
 Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kill Chain ou encore MITRE, vous aident à comprendre les comportements adverses et à renforcer la détection, le tri et la réponse aux alertes.
 
  - 1 [Pyramid of Pain](SOC/POP.md)
