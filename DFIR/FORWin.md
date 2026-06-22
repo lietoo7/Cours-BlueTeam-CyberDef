@@ -108,8 +108,40 @@ python3 -m volatility3 -f memory.dump windows.registry.hivescan
 python3 -m volatility3 -f memory.dump windows.registry.printkey \
   --key "Software\Microsoft\Windows\CurrentVersion\Run"
 ```
+**Tableau de Correspondance des Artefacts Windows & Utilité**
 
----
+### **Quoi Chercher, Où, et Pourquoi**
+
+| Artefact | Localisation | Valeur Forensique | Cas Typique | Outil d'Extraction |
+|----------|-------------|-------------------|------------|------------------|
+| **Prefetch** | `C:\Windows\Prefetch\*.pf` | Preuve d'exécution programme, timestamps | "Quand malware a-t-il été lancé ?" | PECmd.exe |
+| **ShimCache** | `HKLM\System\CurrentControlSet\...\AppCompatCache` | TOUS les programmes exécutés (même supprimés) | Timeline d'exécution complet | RegRipper, Volatility |
+| **Amcache** | `HKLM\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Amcache` | Programmes installés, chemins, versions | "Quelles apps malveillantes ont été lancées ?" | AmcacheParser.exe |
+| **UserAssist** | `HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist` | Compte d'exécution utilisateur (GUI) | "Quel utilisateur a exécuté quoi ?" | RegRipper (ROT-13 decoder) |
+| **Recent/LNK** | `C:\Users\[USER]\AppData\Roaming\Microsoft\Windows\Recent\` | Fichiers accédés/ouverts par utilisateur | "Quels documents sensibles ont été lus ?" | LnkParser.exe |
+| **Jump Lists** | `C:\Users\[USER]\AppData\Roaming\Microsoft\Windows\Recent\AutomaticDestinations\` | Fichiers récents ouverts par application | Timeline usage application | JumpListExplorer |
+| **ShellBags** | `HKCU\Software\Microsoft\Windows\Shell\BagMRU` | Historique navigation dossiers Explorer | "Quels répertoires réseau visités ?" | ShellBagParser.exe |
+| **Run Keys** | `HKCU\Software\Microsoft\Windows\CurrentVersion\Run` | Programmes lancés automatiquement au login | Persistance malware | Reg query, RegRipper |
+| **Services** | `HKLM\System\CurrentControlSet\Services` | Services système (persistence très puissante) | "Service malveillant installé ?" | sc.exe, RegRipper |
+| **Scheduled Tasks** | `HKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule` | Tâches planifiées (persistence) | "Tâche malveillante planifiée ?" | schtasks.exe, TaskSchedulerParser.exe |
+| **NTUSER.DAT** | `C:\Users\[USER]\NTUSER.DAT` | Paramètres utilisateur, MRU, clés exécution | Configuration utilisateur compromise | RegRipper, offline registry analysis |
+| **SAM** | `C:\Windows\System32\config\SAM` | Hashes NTLM tous les comptes locaux | Offline crack passwords | hashdump (Volatility), mimikatz |
+| **SYSTEM** | `C:\Windows\System32\config\SYSTEM` | Configuration système, services, devices | Persistance, services malveillants | RegRipper |
+| **SOFTWARE** | `C:\Windows\System32\config\SOFTWARE` | Applications installées, paramètres globaux | Détection logiciel malveillant | RegRipper |
+| **Event Log Security** | `C:\Windows\System32\winevt\Logs\Security.evtx` | Logins (4624), failures (4625), process creation (4688) | Timeline attaquant, lateral movement | Event Viewer, LogParser, PowerShell Get-WinEvent |
+| **Event Log System** | `C:\Windows\System32\winevt\Logs\System.evtx` | Services started/stopped, driver load, errors | Système anomalies, service install timing | Event Viewer |
+| **Event Log PowerShell** | `C:\Windows\System32\winevt\Logs\Microsoft-Windows-PowerShell.evtx` | PowerShell script execution, commandes | Fileless malware execution | Event Viewer, PowerShell Get-WinEvent |
+| **$MFT** | Master File Table (début volume) | Historique TOUS fichiers (deleted inclus) | Carving deleted files, timestamps | FTK Imager, Encase, Sleuth Kit |
+| **$UsnJrnl** | `C:\$Extend\$UsnJrnl:$J` | Journal changements fichiers temps-réel | Timeline précise modifications | PowerShell USN parser, MFTECmd |
+| **HOSTS file** | `C:\Windows\System32\drivers\etc\hosts` | Redirection DNS locale (C2 domain spoofing) | "Attaquant a-t-il redirigé traffic ?" | cat, type |
+| **Recycle Bin** | `C:\$Recycle.Bin` | Fichiers supprimés par utilisateur | Preuve suppression intentionnelle | Explorer, forensic tools |
+| **Alternate Data Streams** | Files with **:Stream** (NTFS) | Hidden data attaché aux fichiers | Malware cache data dans ADS | streams.exe, AlternateStreamParser.exe |
+| **Registry Hive Backups** | `C:\Windows\System32\config\RegBack\` | Snapshots anciennes du registry | Comparer avant/après modification | Offline registry tools |
+| **MiniDumps** | `C:\Windows\Minidump\` | Application crash dumps | Code injected cause crash → trouvé en dump | WinDbg, Volatility |
+| **Temporary Files** | `C:\Users\[USER]\AppData\Local\Temp\` | Fichiers temporaires programmes | Malware souvent dropt ici | File Explorer |
+| **ProgramData** | `C:\ProgramData` | Données applications globales (pas user-specific) | Persistence shared entre utilisateurs | File Explorer |
+| **Ntfs.sys Log** | MFT journal journal | NTFS transaction log | Detect filesystem corruption/attack | MFTECmd.exe |
+
 
 ### 6.2 Preuves d'Exécution : Prefetch, ShimCache, Amcache, UserAssist
 
