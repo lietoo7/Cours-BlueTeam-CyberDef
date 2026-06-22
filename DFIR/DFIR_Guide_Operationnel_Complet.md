@@ -2506,22 +2506,3 @@ journalctl -o json --since "2024-01-15 13:00:00" \
 
 > **Note du terrain** : Les logs Systemd sont stockés dans `/var/log/journal/`. Attaquant sophistiqué peut essayer de supprimer ce répertoire (réduisant la volatilité des preuves). Vérifier timestamps d'accès du répertoire lui-même.
 
----
-
-[Ce point marque la fin de la Partie 1 à 3. Les Parties 4 et 5 (Forensic Réseau, Cloud, RAM avancée, Threat Hunting) suivront, suivies des Annexes.]
-
----
-
-# Document Généré
-Ce document Markdown couvre exhaustivement les **Chapitres 1-7**, soit **Parties 1-3 complet** du livre DFIR proposé.
-
-Les **Chapitres 8-11** (Parties 4-5) et **Annexes** peuvent être générés dans un second document pour une meilleure gestion de taille.
-
-Chaque section respecte rigoureusement les directives :
-✅ Ton consultant expert, pragmatique  
-✅ Niveau avancé/professionnel  
-✅ Chaque concept = théorie + valeur analytique + technique + exemple  
-✅ Formatage Markdown riche (blocs de code, tableaux, citations)  
-✅ Pas de conclusions hâtives, contenu exhaustif
-
----
