@@ -70,20 +70,11 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
  - 4 [Confinement, Éradication et Résilience](DFIR/DFIR_CER.md)
 ###  **Partie 3 : Informatique Légale et Analyse des Artefacts**
  - 5 [Acquisition de la preuve](DFIR/Acquisition.md)
- - 6 []()
- - 7 []()
- - 10 [Triage initial : Qualifier une alerte et déterminer la sévérité]()
- - 11 [Stratégies de confinement (Réseau, Comptes, Processus)]()
- - 12 [L'art du Live Triage : Collecte d'urgence sur un système en cours d'exécution]()
- - 13 [Éradication des menaces et remédiation (Nettoyage de l'Active Directory, reconstruction)]()
- - 14 [Le RETEX et rapport d'incident]()
- - 15 [Acquisition de la preuve (Collecte)]()
- - 16 [Forensic Windows (L'analyse "Host")]()
- - 17 [Forensic Linux et macOS]()
+ - 6 [Forensic Windows](DFIR/FORWin.md)
+ - 7 [Forensic Linux](DFIR/FORLin.md)
  
 ### C) Exercices Pratiques
 
 C.I) Tryhackme https://tryhackme.com/
-
  - 1 [SUMMIT Writeup](SOC/PRACTICE/thmsummit.md)
  - 2 [Cas de Phishing](SOC/PRACTICE/phishing.md)
