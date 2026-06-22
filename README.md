@@ -75,6 +75,8 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
  - 8 [Forensic Réseau](DFIR/FORreseau.md)
 ### **Partie 4 : ANALYSE AVANCÉE & CHASSE AUX MENACES
  - 9 [Analyse de la Mémoire RAM (Volatility 3 Avancé)](DFIR/FORRam.md)
+ - 10 [Threat Hunting et Rétro-Ingénierie de Malwares](DFIR/FORThreatHunting.md)
+ - 
 ### C) Exercices Pratiques
 
 C.I) Tryhackme https://tryhackme.com/
