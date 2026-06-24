@@ -40,18 +40,18 @@ Ce module aborde les solutions SIEM, EDR, d'IDS/IPS et SOAR.
 > 
  - 1 [Splunk](SOC/Splunk.md)
  - 2 [ELK stack](SOC/ELKstack.md)
- - 3 [MSsentinel]()
+ - 3 [MSsentinel >En cours de rédaction...<]()
 > Système de détection des intrusions (IDS/IPS)
 > 
- - 1 [Suricata]()
- - 2 [Snort]()
- - 3 [Zeek]()
+ - 1 [Suricata >En cours de rédaction...<]()
+ - 2 [Snort >En cours de rédaction...<]()
+ - 3 [Zeek >En cours de rédaction...<]()
 > Gestion des journaux (Log Management)
 > 
- - 1 [Graylog]()
- - 2 [Datadog]()
- - 3 [New Relic]()
- - 4 [Splunk]()
+ - 1 [Graylog >En cours de rédaction...<]()
+ - 2 [Datadog >En cours de rédaction...<]()
+ - 3 [New Relic >En cours de rédaction...<]()
+ - 4 [Splunk >En cours de rédaction...<]()
  - 5 [Le "all-in-one", Security Onion](https://github.com/Security-Onion-Solutions/securityonion)
 #### A.III) CyberDefense Frameworks
 Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kill Chain ou encore MITRE, vous aident à comprendre les comportements adverses et à renforcer la détection, le tri et la réponse aux alertes.
@@ -79,3 +79,15 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
 #### **C.I) Tryhackme https://tryhackme.com/**
  - 1 [SUMMIT Writeup](SOC/PRACTICE/thmsummit.md)
  - 2 [Cas de Phishing](SOC/PRACTICE/phishing.md)
+
+### D) “Sources”
+- https://tryhackme.com/ — Plateforme de labs et parcours de formation cybersécurité (blue team / red team).
+- https://www.root-me.org/ — Plateforme d’exercices et challenges (CTF) pour s’entraîner.
+- https://www.hackthebox.com/ — Plateforme de machines et challenges (pénétration, CTF).
+- https://www.sans.org/posters — Ressources/affiches SANS (guides et bonnes pratiques sécurité et forensic).
+- https://attack.mitre.org/ — Base ATT&CK de MITRE (tactiques, techniques et procédures).
+- https://docs.splunk.com/Documentation — Documentation Splunk (fonctionnalités, recherche, configuration).
+- https://www.elastic.co/docs — Documentation Elastic (Elasticsearch, Kibana, Beats, etc.).
+- https://grafana.com/docs/ — Documentation Grafana (dashboards, data sources, configuration).
+- https://messervices.cyber.gouv.fr/catalogue — Catalogue de services/ressources de cybersécurité (ANSSI).
+ 
