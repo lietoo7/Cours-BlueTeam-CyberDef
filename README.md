@@ -75,10 +75,14 @@ Comment les cadres de défense, tels que la Pyramid of Pain , la Cyber ​​Kil
 ### **Partie 4 : ANALYSE AVANCÉE & CHASSE AUX MENACES**
  - 9 [Analyse de la Mémoire RAM (Volatility 3 Avancé)](DFIR/FORRam.md)
  - 10 [Threat Hunting et Rétro-Ingénierie de Malwares](DFIR/FORThreatHunting.md)
+
 ### C) Exercices Pratiques
 #### **C.I) Tryhackme https://tryhackme.com/**
  - 1 [SUMMIT Writeup](SOC/PRACTICE/thmsummit.md)
  - 2 [Cas de Phishing](SOC/PRACTICE/phishing.md)
+
+#### **C.II) TPs
+- 1 [Wireshark Analyse du trafic](SOC/PRACTICE/wireshark.md)
 
 ### D) “Sources”
 - https://tryhackme.com/ — Plateforme de labs et parcours de formation cybersécurité (blue team / red team).
